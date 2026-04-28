@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const games = [
+  {
+    title: "Game Title",
+    description: "Short description of the game.",
+    status: "Released",
+    platforms: ["PC"],
+  },
+];
+---
+
+<Layout title="Games" description="All games made by FriedGames">
+  <h1>Our Games</h1>
+
+  <ul>
+    {games.map((game) => (
+      <li>
+        <h2>{game.title}</h2>
+        <p>{game.description}</p>
+        <p>Status: {game.status}</p>
+        <p>Platforms: {game.platforms.join(", ")}</p>
+        <a href="#">Learn more</a>
+      </li>
+    ))}
+  </ul>
+</Layout>
