@@ -3,10 +3,11 @@ import Layout from '../layouts/Layout.astro';
 
 const games = [
   {
-    title: "Game Title",
-    description: "Short description of the game.",
-    status: "Released",
+    title: "Stroom",
+    description: "A unique experience from FriedGames. More details coming soon.",
+    status: "Coming 2026",
     platforms: ["PC"],
+    steamUrl: "https://store.steampowered.com/app/3869320/Stroom/",
   },
 ];
 ---
@@ -21,7 +22,7 @@ const games = [
         <p>{game.description}</p>
         <p>Status: {game.status}</p>
         <p>Platforms: {game.platforms.join(", ")}</p>
-        <a href="#">Learn more</a>
+        <a href={game.steamUrl} target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
       </li>
     ))}
   </ul>
