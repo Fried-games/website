@@ -3,22 +3,431 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Home">
-  <section>
-    <h1>FriedGames</h1>
-    <p>Independent game studio crafting unique experiences.</p>
-    <a href="/games">See our games</a>
+  <div class="page">
+    <section class="hero">
+      <p class="eyebrow">Fried Games</p>
+      <h1>Independent game studio.</h1>
+      <p class="tagline">We cook games.</p>
+      <a href="/#stroom">See our games</a>
+    </section>
+  </div>
+
+  <div class="stroom-line"></div>
+  <section class="stroom-section" id="stroom">
+    <div class="stroom-inner">
+      <h2 class="stroom-title">
+        <img src="/images/stroom-title-black.png" alt="Stroom" />
+      </h2>
+
+      <div class="stroom-body">
+        <div class="stroom-video">
+          <span>Trailer coming soon</span>
+        </div>
+
+        <div class="stroom-info">
+          <p class="stroom-coming">Coming 2026</p>
+
+          <div class="stroom-desc">
+            <p><strong>Stroom</strong> is a <strong>precision platformer</strong> that follows a black cat thrown into an unfamiliar world after a lightning strike awakens a power he cannot explain.</p>
+            <p>Dash through obstacles, charge past enemies, wallslide through tight corridors and find the optimal path through <strong>100 handcrafted levels</strong>. Each world introduces new mechanics that build on the last, pushing your skills further with every stage.</p>
+            <p>Five worlds. Five bosses. One cat trying to get home.</p>
+            <p class="stroom-tagline">Die. Learn. Go faster.</p>
+          </div>
+
+          <div class="stroom-actions">
+            <a
+              href="https://store.steampowered.com/app/3869320/Stroom/?beta=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-wishlist"
+            >Wishlist on Steam now</a>
+            <button
+              class="btn-playtest"
+              id="btn-playtest"
+              type="button"
+              aria-expanded="false"
+              aria-controls="playtest"
+            >
+              Join the playtest
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stroom-playtest" id="playtest">
+        <div class="playtest-clip">
+          <div class="playtest-body">
+            <h3 class="playtest-title">Join the Stroom playtest</h3>
+            <p class="playtest-desc">We run limited playtests before release. Leave your email and we'll reach out when spots open up.</p>
+            <form id="waitlist-form" class="playtest-form">
+              <div class="playtest-fields">
+                <input type="text" name="name" placeholder="Name (optional)" autocomplete="name" />
+                <input type="email" name="email" placeholder="Email" required autocomplete="email" />
+                <button type="submit" class="btn-waitlist">Join the waitlist</button>
+              </div>
+              <p class="playtest-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <h2>Stroom — Coming 2026</h2>
-    <p>Our next game is on the way. Wishlist it on Steam to stay in the loop.</p>
-    <a href="https://store.steampowered.com/app/3869320/Stroom/" target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
-    <a href="/games">View all games</a>
-  </section>
-
-  <section>
-    <h2>About the Studio</h2>
-    <p>We are a small independent studio passionate about creating memorable games.</p>
-    <a href="/about">Learn more</a>
-  </section>
+  <a href="https://steamcommunity.com/groups/fried-games" target="_blank" rel="noopener noreferrer" class="community-strip">
+    <img src="/images/community-banner.png" alt="Fried Games Steam Community" />
+  </a>
 </Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .eyebrow {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--fg-black);
+    line-height: 1;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--fg-gray);
+  }
+
+  .hero a {
+    font-weight: 500;
+    border-bottom: 2px solid var(--fg-black);
+    padding-bottom: 2px;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .stroom-line {
+    height: 6px;
+    background: var(--stroom-main);
+    margin-bottom: 10px;
+  }
+
+  /* Stroom - full width */
+  .stroom-section {
+    scroll-margin-top: 80px;
+    background: var(--stroom-main);
+    width: 100%;
+    padding: 6rem 0;
+  }
+
+  .stroom-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stroom-title {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .stroom-title img {
+    height: 88px;
+    width: auto;
+    display: inline-block;
+  }
+
+  /* Two columns: video left, info right */
+  .stroom-body {
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .stroom-video {
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    background: rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stroom-video span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .stroom-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .stroom-coming {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .stroom-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stroom-desc p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .stroom-tagline {
+    font-weight: 700 !important;
+    color: #000 !important;
+    font-style: italic;
+  }
+
+  .stroom-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+  }
+
+  .btn-wishlist {
+    background: var(--fg-black);
+    color: var(--stroom-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    transition: opacity 0.15s;
+  }
+
+  .btn-wishlist:hover {
+    opacity: 0.8;
+  }
+
+  .btn-playtest {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--fg-black);
+    padding: 0 0 2px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--fg-black);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .btn-playtest .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .btn-playtest[aria-expanded="true"] .arrow {
+    transform: rotate(90deg);
+  }
+
+  /* Playtest form */
+  .stroom-playtest {
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    margin-top: 3.5rem;
+  }
+
+  .playtest-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+  }
+
+  /* Animated reveal for form content */
+  .playtest-clip {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s ease, opacity 0.35s ease;
+  }
+
+  .stroom-playtest.open .playtest-clip {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .playtest-body {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .playtest-desc {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .playtest-fields {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .playtest-fields input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.875rem 1.25rem;
+    background: rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #000;
+  }
+
+  .playtest-fields input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .playtest-fields input:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .btn-waitlist {
+    background: var(--fg-black);
+    color: var(--stroom-main);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-waitlist:hover { opacity: 0.8; }
+  .btn-waitlist:disabled { opacity: 0.5; cursor: default; }
+
+  .playtest-status {
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: 1.4em;
+  }
+
+  /* Community strip */
+  .community-strip {
+    display: flex;
+    justify-content: center;
+    line-height: 0;
+    background: var(--stroom-main);
+  }
+
+  .community-strip img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    display: block;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('btn-playtest') as HTMLButtonElement;
+  const section = document.getElementById('playtest') as HTMLElement;
+
+  function openPanel() {
+    section.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 420);
+  }
+
+  btn?.addEventListener('click', () => {
+    if (section.classList.contains('open')) {
+      section.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      openPanel();
+    }
+  });
+
+  if (window.location.hash === '#playtest') {
+    openPanel();
+  }
+
+  document.querySelector<HTMLAnchorElement>('a[href="/#playtest"]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openPanel();
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>('a[href="/#stroom"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('stroom')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const waitlistForm = document.getElementById('waitlist-form') as HTMLFormElement;
+  const statusEl = waitlistForm?.querySelector<HTMLParagraphElement>('.playtest-status')!;
+  const submitBtn = waitlistForm?.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+  waitlistForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Joining…';
+
+    const fd = new FormData(waitlistForm);
+    const params = new URLSearchParams();
+    fd.forEach((value, key) => params.append(key, value.toString()));
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        statusEl.textContent = data.alreadyRegistered
+          ? 'You are already on the list!'
+          : "You're on the list! We'll be in touch when spots open.";
+        waitlistForm.reset();
+      } else {
+        statusEl.textContent = `Error: ${data.error ?? res.status}`;
+      }
+    } catch (err) {
+      statusEl.textContent = `Network error: ${err}`;
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>

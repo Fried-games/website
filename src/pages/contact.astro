@@ -2,91 +2,178 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact" description="Contact FriedGames">
-  <h1>Contact</h1>
+<Layout title="Contact" description="Contact Fried Games">
+  <div class="page">
+    <section class="page-header">
+      <h1>Contact</h1>
+    </section>
 
-  <section>
-    <h2>General inquiry</h2>
-    <p>Press, partnerships, anything else — use this form.</p>
+    <form id="contact-form" class="contact-form">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+      </div>
 
-    <form id="contact-form" data-type="contact">
-      <label for="contact-name">Name</label>
-      <input type="text" id="contact-name" name="name" required />
+      <div class="field">
+        <label for="type">Subject</label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="contact">General inquiry: press, partnerships, other</option>
+          <option value="support">Support: bug report, in-game problem</option>
+        </select>
+      </div>
 
-      <label for="contact-email">Email</label>
-      <input type="email" id="contact-email" name="email" required />
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+      </div>
 
-      <label for="contact-message">Message</label>
-      <textarea id="contact-message" name="message" rows="5" required></textarea>
-
-      <button type="submit">Send message</button>
-      <p class="form-status" aria-live="polite"></p>
+      <div class="form-footer">
+        <button type="submit">Send</button>
+        <p class="form-status" aria-live="polite"></p>
+      </div>
     </form>
-  </section>
-
-  <section>
-    <h2>Support</h2>
-    <p>Bug reports, account issues, in-game problems — use this form.</p>
-
-    <form id="support-form" data-type="support">
-      <label for="support-name">Name</label>
-      <input type="text" id="support-name" name="name" required />
-
-      <label for="support-email">Email</label>
-      <input type="email" id="support-email" name="email" required />
-
-      <label for="support-message">Describe the issue</label>
-      <textarea id="support-message" name="message" rows="5" required></textarea>
-
-      <button type="submit">Send request</button>
-      <p class="form-status" aria-live="polite"></p>
-    </form>
-  </section>
-
-  <section>
-    <h2>Social</h2>
-    <ul>
-      <li><a href="#">Twitter / X</a></li>
-      <li><a href="#">itch.io</a></li>
-      <li><a href="#">Steam</a></li>
-    </ul>
-  </section>
+  </div>
 </Layout>
 
+<style>
+  .page-header {
+    padding: 4rem 0 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--fg-border);
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 680px;
+    padding-bottom: 5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--fg-gray);
+  }
+
+  input, select, textarea {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--fg-border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--fg-black);
+    background: #fff;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--fg-black);
+  }
+
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .form-footer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  button[type="submit"] {
+    background: var(--fg-black);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  button[type="submit"]:hover { opacity: 0.75; }
+  button[type="submit"]:disabled { opacity: 0.4; cursor: default; }
+
+  .form-status {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fg-black);
+  }
+</style>
+
 <script>
-  document.querySelectorAll<HTMLFormElement>('form[data-type]').forEach((form) => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
-      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
-      button.disabled = true;
-      status.textContent = 'Sending…';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    status.textContent = 'Sending…';
 
-      const fd = new FormData(form);
-      const params = new URLSearchParams();
-      fd.forEach((value, key) => params.append(key, value.toString()));
-      params.set('type', form.dataset.type!);
+    const fd = new FormData(form);
+    const params = new URLSearchParams();
+    fd.forEach((value, key) => params.append(key, value.toString()));
 
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: params.toString(),
-        });
-
-        const data = await res.json();
-        if (res.ok) {
-          status.textContent = 'Message sent. We will get back to you shortly.';
-          form.reset();
-        } else {
-          status.textContent = `Error: ${data.error ?? res.status}`;
-        }
-      } catch (err) {
-        status.textContent = `Network error: ${err}`;
-      } finally {
-        button.disabled = false;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        status.textContent = 'Message sent. We will get back to you shortly.';
+        form.reset();
+      } else {
+        status.textContent = `Error: ${data.error ?? res.status}`;
       }
-    });
+    } catch (err) {
+      status.textContent = `Network error: ${err}`;
+    } finally {
+      button.disabled = false;
+    }
   });
 </script>
