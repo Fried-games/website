@@ -8,7 +8,6 @@ import Layout from '../layouts/Layout.astro';
       <p class="eyebrow">Fried Games</p>
       <h1>Independent game studio.</h1>
       <p class="tagline">We cook games.</p>
-      <a href="/#stroom">See our games</a>
     </section>
   </div>
 
@@ -91,7 +90,7 @@ import Layout from '../layouts/Layout.astro';
   .eyebrow {
     font-size: 3.5rem;
     font-weight: 700;
-    color: var(--fg-black);
+    color: var(--fg-white);
     line-height: 1;
   }
 
@@ -106,15 +105,7 @@ import Layout from '../layouts/Layout.astro';
     color: var(--fg-gray);
   }
 
-  .hero a {
-    font-weight: 500;
-    border-bottom: 2px solid var(--fg-black);
-    padding-bottom: 2px;
-    align-self: flex-start;
-    margin-top: 0.5rem;
-  }
-
-  .stroom-line {
+.stroom-line {
     height: 6px;
     background: var(--stroom-main);
     margin-bottom: 10px;
@@ -129,9 +120,9 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .stroom-inner {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 3rem;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -151,8 +142,8 @@ import Layout from '../layouts/Layout.astro';
   /* Two columns: video left, info right */
   .stroom-body {
     display: grid;
-    grid-template-columns: 1fr 460px;
-    gap: 3rem;
+    grid-template-columns: 1fr 560px;
+    gap: 4rem;
     align-items: center;
   }
 
@@ -182,11 +173,12 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .stroom-coming {
-    font-size: 1.1rem;
+    font-size: 2.8rem;
     font-weight: 700;
     color: #000;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
+    line-height: 1;
   }
 
   .stroom-desc {
@@ -196,8 +188,8 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .stroom-desc p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.75;
     color: rgba(0, 0, 0, 0.8);
   }
 
@@ -389,14 +381,7 @@ import Layout from '../layouts/Layout.astro';
     openPanel();
   });
 
-  document.querySelectorAll<HTMLAnchorElement>('a[href="/#stroom"]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('stroom')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  const waitlistForm = document.getElementById('waitlist-form') as HTMLFormElement;
+const waitlistForm = document.getElementById('waitlist-form') as HTMLFormElement;
   const statusEl = waitlistForm?.querySelector<HTMLParagraphElement>('.playtest-status')!;
   const submitBtn = waitlistForm?.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
