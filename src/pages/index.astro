@@ -337,6 +337,88 @@ import Layout from '../layouts/Layout.astro';
     min-height: 1.4em;
   }
 
+  /* ── Bascule colonne unique ── */
+  @media (max-width: 1300px) {
+    .stroom-body {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .stroom-info {
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 2.5rem;
+    }
+
+    .eyebrow {
+      font-size: 2.4rem;
+    }
+
+    .hero h1 {
+      font-size: 1.9rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .stroom-section {
+      padding: 3.5rem 0;
+    }
+
+    .stroom-inner {
+      padding: 0 1.25rem;
+    }
+
+    .stroom-title {
+      margin-bottom: 2.5rem;
+    }
+
+    .stroom-title img {
+      height: 60px;
+    }
+
+    .stroom-coming {
+      font-size: 2rem;
+    }
+
+    .stroom-desc p {
+      font-size: 1rem;
+    }
+
+    .stroom-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .btn-wishlist {
+      font-size: 1rem;
+      padding: 0.875rem 1.75rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .playtest-fields {
+      flex-direction: column;
+    }
+
+    .playtest-fields input {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .btn-waitlist {
+      width: 100%;
+    }
+  }
+
   /* Community strip */
   .community-strip {
     display: flex;

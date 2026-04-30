@@ -21,12 +21,16 @@ const { title, description = "Fried Games - Independent game studio" } = Astro.p
   </head>
   <body>
     <header>
-      <nav>
+      <nav id="main-nav">
         <a href="/" class="logo">
           <img src="/images/fg-logo-white.png" alt="Fried Games" />
           <span>Fried Games</span>
         </a>
-        <ul>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+          <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+        </button>
+        <ul id="nav-links">
           <li><a href="/#stroom">Games</a></li>
           <li><a href="/#playtest">Playtest</a></li>
           <li><a href="/about">About</a></li>
@@ -265,4 +269,132 @@ const { title, description = "Fried Games - Independent game studio" } = Astro.p
     margin: 0 auto;
     padding: 4rem 3rem;
   }
+
+  /* Hamburger button */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--fg-white);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .icon-close { display: none; }
+  nav.nav-open .icon-menu { display: none; }
+  nav.nav-open .icon-close { display: block; }
+
+  /* ── Tablet ── */
+  @media (max-width: 1024px) {
+    header nav {
+      padding: 0 2rem;
+    }
+
+    .footer-inner {
+      padding: 2rem 2rem;
+    }
+
+    .page {
+      padding: 3.5rem 2rem;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    header nav {
+      padding: 0 1.25rem;
+      flex-wrap: wrap;
+      height: auto;
+      min-height: 60px;
+      gap: 0;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    header nav ul {
+      position: static;
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      gap: 0;
+      padding: 0.5rem 0 1rem;
+      pointer-events: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav.nav-open ul {
+      display: flex;
+    }
+
+    header nav ul a {
+      padding: 0.75rem 0;
+      font-size: 1.05rem;
+    }
+
+    header nav ul a:hover {
+      transform: none;
+    }
+
+    header nav .logo img {
+      height: 36px;
+    }
+
+    header nav .logo span {
+      font-size: 1rem;
+    }
+
+    .footer-inner {
+      padding: 2rem 1.25rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-left {
+      gap: 1rem;
+    }
+
+    footer .footer-left img {
+      height: 52px;
+    }
+
+    .footer-right {
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .footer-emails {
+      text-align: left;
+    }
+
+    .page {
+      padding: 2.5rem 1.25rem;
+    }
+  }
 </style>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.nav-toggle');
+
+  toggle?.addEventListener('click', () => {
+    const open = nav!.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  nav?.querySelectorAll<HTMLAnchorElement>('#nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
