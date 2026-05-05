@@ -9,9 +9,14 @@ export const POST: APIRoute = async ({ request }) => {
   console.log('[waitlist] content-type:', request.headers.get('content-type'));
   console.log('[waitlist] raw body:', JSON.stringify(text));
   const params = new URLSearchParams(text);
+  const honeypot = params.get('website');
   const email = params.get('email')?.trim();
   const name = params.get('name')?.trim() || undefined;
   console.log('[waitlist] email:', email, '| name:', name);
+
+  if (honeypot) {
+    return new Response(JSON.stringify({ ok: true, alreadyRegistered: false }), { status: 200 });
+  }
 
   if (!email) {
     return new Response(JSON.stringify({ error: 'Email required', debug: { text, email, name } }), { status: 400 });

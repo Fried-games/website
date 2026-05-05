@@ -29,6 +29,11 @@ import Layout from '../layouts/Layout.astro';
         </select>
       </div>
 
+      <div class="field hp-field" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" autocomplete="off" tabindex="-1" />
+      </div>
+
       <div class="field">
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="6" required></textarea>
@@ -110,6 +115,16 @@ import Layout from '../layouts/Layout.astro';
 
   textarea {
     resize: none;
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .form-footer {

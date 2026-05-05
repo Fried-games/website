@@ -60,6 +60,10 @@ import Layout from '../layouts/Layout.astro';
             <h3 class="playtest-title">Join the Stroom playtest</h3>
             <p class="playtest-desc">We run limited playtests before release. Leave your email and we'll reach out when spots open up.</p>
             <form id="waitlist-form" class="playtest-form">
+              <div class="hp-field" aria-hidden="true">
+                <label for="hp-website">Website</label>
+                <input type="text" id="hp-website" name="website" autocomplete="off" tabindex="-1" />
+              </div>
               <div class="playtest-fields">
                 <input type="text" name="name" placeholder="Name (optional)" autocomplete="name" />
                 <input type="email" name="email" placeholder="Email" required autocomplete="email" />
@@ -284,6 +288,16 @@ import Layout from '../layouts/Layout.astro';
     color: rgba(0, 0, 0, 0.7);
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .playtest-fields {

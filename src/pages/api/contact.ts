@@ -7,10 +7,15 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request }) => {
   const text = await request.text();
   const params = new URLSearchParams(text);
+  const honeypot = params.get('website');
   const name = params.get('name')?.trim();
   const email = params.get('email')?.trim();
   const message = params.get('message')?.trim();
   const type = params.get('type')?.trim();
+
+  if (honeypot) {
+    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+  }
 
   if (!name || !email || !message || !['contact', 'support'].includes(type ?? '')) {
     return new Response(JSON.stringify({ error: 'Invalid payload' }), { status: 400 });
