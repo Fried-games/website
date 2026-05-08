@@ -24,6 +24,13 @@
 .DS_Store
 *.pem
 
+# legacy Astro build
+/dist
+/.astro
+
+# IDE
+.idea
+
 # debug
 npm-debug.log*
 yarn-debug.log*
