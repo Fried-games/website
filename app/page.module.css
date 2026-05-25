@@ -72,8 +72,8 @@
   font-family: var(--font-display), "Pixelify Sans", "VT323", monospace;
   letter-spacing: 0.08em;
 }
-.navBrand { display: flex; align-items: center; gap: 10px; font-size: 22px; color: var(--yellow-2); font-weight: 700; text-decoration: none; cursor: pointer; }
-.navLogo { height: 28px; width: auto; display: block; }
+.navBrand { display: flex; align-items: center; gap: 10px; font-size: 22px; color: #fff; font-weight: 700; text-decoration: none; cursor: pointer; }
+.navLogo { height: 40px; width: auto; display: block; }
 .navLinks { display: flex; gap: 22px; justify-self: center; }
 .navLinks a { color: var(--fg); text-decoration: none; font-size: 18px; }
 .navLinks a:hover { color: var(--yellow); }
@@ -486,7 +486,7 @@
 .footerBrand {
   display: flex; align-items: center; gap: 12px; flex-shrink: 0;
 }
-.footerLogo { height: 36px; width: auto; display: block; }
+.footerLogo { height: 52px; width: auto; display: block; }
 .footerStudio {
   font-family: var(--font-display), "Pixelify Sans", monospace;
   font-size: 15px; font-weight: 700; letter-spacing: 0.18em;

@@ -16,9 +16,7 @@ export default function Hero() {
           <img src="/stroom/stroom-title.png" alt="STROOM" />
         </div>
         <div className={styles.heroTag}>
-          A precision platformer about a black cat thrown into
-          <br />
-          an unfamiliar world by a lightning strike he cannot explain.
+          A precision platformer about a black cat with lightning powers
         </div>
         <div className={styles.heroCtas}>
           <a

@@ -3,16 +3,6 @@ import styles from "../page.module.css";
 const LINKS = [
   {
     label: "Steam",
-    sub: "Store page",
-    href: "https://store.steampowered.com/app/3869320/Stroom/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.187.006l2.861-4.143V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.516 3.396-3.391 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.298-.244-1.878-.03l1.523.63c.956.4 1.409 1.497 1.009 2.455-.397.957-1.494 1.407-2.455 1.012zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.664 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Steam",
     sub: "Community",
     href: "https://steamcommunity.com/groups/fried-games",
     icon: (
@@ -51,6 +41,26 @@ const LINKS = [
       </svg>
     ),
   },
+  {
+    label: "X",
+    sub: "@FriedGames27746",
+    href: "https://x.com/FriedGames27746",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.903-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Bluesky",
+    sub: "@friedgames",
+    href: "https://bsky.app/profile/friedgames.bsky.social",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
@@ -59,7 +69,7 @@ export default function Footer() {
       <div className={styles.footerInner}>
         <div className={styles.footerBrand}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/stroom/fg-logo-white.png" alt="Fried Games" className={styles.footerLogo} />
+          <img src="/stroom/Icon_only.png" alt="Fried Games" className={styles.footerLogo} />
           <span className={styles.footerStudio}>FRIED GAMES</span>
         </div>
         <div className={styles.footerLinks}>
