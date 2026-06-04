@@ -110,7 +110,7 @@ function Studio() {
         <div className={styles.studioInfo}>
           <div className={styles.studioLogo}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/stroom/Icon_text_under_bg.png" alt="Fried Games" />
+            <img src="/stroom/fg-logo-text-under.png" alt="Fried Games" />
           </div>
           <div className={styles.studioTxt}>
             <div className={styles.studioName}>FRIED GAMES</div>
@@ -144,8 +144,7 @@ export default async function Page() {
       <nav className={styles.nav}>
         <a href="#" className={styles.navBrand}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/stroom/Icon_only.png" alt="Fried Games" className={styles.navLogo} />
-          <span>FRIED GAMES</span>
+          <img src="/stroom/fg-logo-banner.png" alt="Fried Games" className={styles.navLogo} />
         </a>
         <div className={styles.navLinks}>
           <a href="#lore">ABOUT</a>

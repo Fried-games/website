@@ -69,8 +69,7 @@ export default function Footer() {
       <div className={styles.footerInner}>
         <div className={styles.footerBrand}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/stroom/Icon_only.png" alt="Fried Games" className={styles.footerLogo} />
-          <span className={styles.footerStudio}>FRIED GAMES</span>
+          <img src="/stroom/fg-logo-banner.png" alt="Fried Games" className={styles.footerLogo} />
         </div>
         <div className={styles.footerLinks}>
           {LINKS.map(({ label, sub, href, icon }) => (
