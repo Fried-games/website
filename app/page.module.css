@@ -14,7 +14,7 @@
   position: relative;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-mono), "VT323", "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-mono), ui-sans-serif, sans-serif;
   font-size: 18px;
   line-height: 1.4;
   min-height: 100vh;
@@ -30,17 +30,6 @@
 /* CRT overlay */
 .crtOverlay {
   position: absolute; inset: 0; pointer-events: none; z-index: 100;
-}
-.crtScanlines {
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0px,
-    rgba(0,0,0,0) 2px,
-    rgba(0,0,0,0.18) 3px,
-    rgba(0,0,0,0.18) 3px
-  );
-  mix-blend-mode: multiply;
 }
 .crtVignette {
   position: absolute; inset: 0;
@@ -69,7 +58,7 @@
   background: rgba(10,10,10,0.85);
   backdrop-filter: blur(4px);
   border-bottom: 2px solid var(--yellow);
-  font-family: var(--font-display), "Pixelify Sans", "VT323", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   letter-spacing: 0.08em;
 }
 .navBrand { display: flex; align-items: center; gap: 10px; font-size: 22px; color: #fff; font-weight: 700; text-decoration: none; cursor: pointer; }
@@ -82,7 +71,7 @@
   color: var(--bg); background: var(--yellow-2); padding: 8px 14px;
   text-decoration: none; font-weight: 700; letter-spacing: 0.1em;
   box-shadow: 4px 4px 0 #000;
-  font-family: var(--font-display), "Pixelify Sans", "VT323", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
 }
 .navCta:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 #000; }
 
@@ -102,7 +91,7 @@
 }
 .bootLine { white-space: pre; }
 
-.heroCenter { display: grid; gap: 26px; place-items: center; max-width: 880px; }
+.heroCenter { display: grid; gap: 34px; place-items: center; max-width: 1080px; }
 .heroCathead {
   width: 168px; height: 168px;
   background: var(--yellow);
@@ -117,23 +106,24 @@
 .heroCathead::after { bottom: -14px; right: -14px; box-shadow: -14px 0 0 var(--bg), 0 -14px 0 var(--bg); }
 .heroCathead img { width: 88%; height: 88%; object-fit: contain; }
 
-.heroTitle { width: min(720px, 80vw); }
+.heroTitle { width: min(940px, 88vw); }
 .heroTitle img {
   width: 100%; height: auto;
   filter: none;
 }
 .heroTag {
-  font-size: 22px; color: #d8cfa6; max-width: 640px;
+  font-size: 27px; color: #d8cfa6; max-width: 780px;
 }
-.heroCtas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+.heroCtas { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.heroCtas .pixBtn { padding: 18px 30px; font-size: 22px; }
 .heroMeta {
   display: flex; gap: 14px; align-items: center;
   font-size: 16px; color: var(--dim); letter-spacing: 0.08em; margin-top: 8px;
 }
 .dot { color: var(--yellow); }
 .heroComing {
-  font-family: var(--font-mono), "JetBrains Mono", monospace;
-  font-size: 48px; font-weight: 700; letter-spacing: 0.15em;
+  font-family: var(--font-mono), ui-sans-serif, sans-serif;
+  font-size: 62px; font-weight: 700; letter-spacing: 0.15em;
   color: var(--yellow); margin-top: 12px;
 }
 
@@ -166,7 +156,7 @@
 /* Pixel button */
 .pixBtn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 14px 22px; font-family: var(--font-display), "Pixelify Sans", "VT323", monospace; font-weight: 700; font-size: 18px; line-height: 1;
+  padding: 14px 22px; font-family: var(--font-display), ui-sans-serif, sans-serif; font-weight: 700; font-size: 18px; line-height: 1;
   letter-spacing: 0.1em; text-decoration: none;
   background: transparent; color: var(--fg);
   border: 2px solid var(--fg);
@@ -190,12 +180,12 @@
   margin-bottom: 100px;
 }
 .sectionNum {
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 14px; color: var(--bg); background: var(--yellow);
   padding: 4px 10px; letter-spacing: 0.15em;
 }
 .sectionTitle {
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 32px; letter-spacing: 0.08em; margin: 0; color: var(--fg);
 }
 .sectionRule {
@@ -345,7 +335,7 @@
   cursor: pointer;
   display: grid; place-items: center;
   box-shadow: 4px 4px 0 #000;
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-mono), ui-sans-serif, sans-serif;
   transition: transform 80ms, box-shadow 80ms;
 }
 .carouselArrow:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 #000; }
@@ -391,7 +381,7 @@
   box-shadow: 8px 8px 0 #000;
 }
 .loreFeatureTitle {
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 14px; letter-spacing: 0.18em; color: var(--yellow);
   margin-bottom: 20px;
 }
@@ -425,10 +415,10 @@
   display: grid; gap: 18px;
 }
 .field { display: grid; gap: 6px; }
-.fieldLabel { font-family: var(--font-display), "Pixelify Sans", monospace; font-size: 14px; letter-spacing: 0.16em; color: var(--yellow); }
+.fieldLabel { font-family: var(--font-display), ui-sans-serif, sans-serif; font-size: 14px; letter-spacing: 0.16em; color: var(--yellow); }
 .fieldInput {
   background: #050505; border: 2px solid var(--dim); color: var(--fg);
-  padding: 12px 14px; font-family: var(--font-mono), "VT323", monospace; font-size: 18px; outline: none;
+  padding: 12px 14px; font-family: var(--font-mono), ui-sans-serif, sans-serif; font-size: 18px; outline: none;
 }
 .fieldInput:focus { border-color: var(--yellow); }
 .playtestOk { color: var(--yellow); font-size: 16px; }
@@ -441,7 +431,7 @@
 .skillOption span {
   padding: 10px 18px;
   border: 2px solid var(--dim);
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 15px; letter-spacing: 0.12em;
   color: var(--dim);
   transition: border-color 100ms, color 100ms;
@@ -464,7 +454,7 @@
 }
 .card:hover { border-color: var(--yellow); transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--yellow); }
 .cardIcon { color: var(--yellow); font-size: 30px; }
-.cardTitle { font-family: var(--font-display), "Pixelify Sans", monospace; font-size: 22px; letter-spacing: 0.12em; }
+.cardTitle { font-family: var(--font-display), ui-sans-serif, sans-serif; font-size: 22px; letter-spacing: 0.12em; }
 .cardSub { color: #b8b08a; font-size: 16px; }
 .cardCta { color: var(--yellow); margin-top: auto; letter-spacing: 0.1em; }
 .cardNews { cursor: default; }
@@ -472,7 +462,7 @@
 .newsForm { display: flex; gap: 0; margin-top: auto; border: 2px solid var(--dim); }
 .newsInput {
   flex: 1; background: #050505; border: 0; color: var(--fg);
-  padding: 10px 12px; font-family: var(--font-mono), "VT323", monospace; font-size: 16px; outline: none;
+  padding: 10px 12px; font-family: var(--font-mono), ui-sans-serif, sans-serif; font-size: 16px; outline: none;
 }
 .newsBtn { background: var(--yellow); color: var(--bg); border: 0; padding: 0 16px; font-size: 22px; cursor: pointer; }
 
@@ -481,13 +471,13 @@
 .studioInfo { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: center; width: 100%; max-width: 760px; }
 .studioLogo { background: #1a1a1a; padding: 24px; border: 2px solid var(--dim); }
 .studioLogo img { width: 100%; height: auto; }
-.studioName { font-family: var(--font-display), "Pixelify Sans", monospace; font-size: 28px; letter-spacing: 0.12em; color: var(--yellow); margin-bottom: 14px; }
+.studioName { font-family: var(--font-display), ui-sans-serif, sans-serif; font-size: 28px; letter-spacing: 0.12em; color: var(--yellow); margin-bottom: 14px; }
 .studioTxt p { font-size: 20px; color: #d8cfa6; max-width: 60ch; }
 .studioLinks { display: flex; gap: 22px; margin-top: 18px; flex-wrap: wrap; }
 .studioLinks a { color: var(--fg); text-decoration: none; }
 .studioLinks a:hover { color: var(--yellow); }
 .contactBox { background: #0d0d0d; border: 2px solid var(--dim); padding: 28px; box-shadow: 10px 10px 0 #000; width: 100%; max-width: 760px; }
-.contactBoxTitle { font-family: var(--font-display), "Pixelify Sans", monospace; font-size: 14px; letter-spacing: 0.16em; color: var(--yellow); margin-bottom: 20px; }
+.contactBoxTitle { font-family: var(--font-display), ui-sans-serif, sans-serif; font-size: 14px; letter-spacing: 0.16em; color: var(--yellow); margin-bottom: 20px; }
 .contactForm { display: grid; gap: 16px; }
 .fieldTextarea { resize: vertical; min-height: 120px; }
 
@@ -508,7 +498,7 @@
 }
 .footerLogo { height: 78px; width: auto; display: block; }
 .footerStudio {
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 15px; font-weight: 700; letter-spacing: 0.18em;
   color: var(--fg);
 }
@@ -528,7 +518,7 @@
 .footerIcon { width: 24px; height: 24px; color: var(--dim); flex-shrink: 0; }
 .footerIcon svg { width: 100%; height: 100%; }
 .footerLinkLabel {
-  font-family: var(--font-display), "Pixelify Sans", monospace;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
   font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
   color: var(--fg);
 }
@@ -549,8 +539,11 @@
 
   .hero { height: 100dvh; padding: 120px 16px 60px; }
   .heroBoot { position: relative; top: auto; left: auto; margin-bottom: 24px; }
-  .heroTitle { width: min(420px, 90vw); }
-  .heroTag { font-size: 18px; }
+  .heroTitle { width: min(520px, 92vw); }
+  .heroTag { font-size: 20px; }
+  .heroCenter { gap: 24px; }
+  .heroCtas .pixBtn { padding: 15px 22px; font-size: 18px; }
+  .heroComing { font-size: 40px; }
   .heroCornerTr, .heroCornerBl, .heroCornerBr { display: none; }
 
   .section { padding: 48px 16px; }

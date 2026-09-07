@@ -12,7 +12,6 @@ const STEAM_URL =
 function CRTOverlay() {
   return (
     <div className={styles.crtOverlay} aria-hidden="true">
-      <div className={styles.crtScanlines} />
       <div className={styles.crtVignette} />
       <div className={styles.crtFlicker} />
     </div>
@@ -47,7 +46,7 @@ const KEY_FEATURES = [
 function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies: SteamMovie[] }) {
   return (
     <section className={styles.section} id="lore">
-      <SectionHead num="01" title="// ABOUT THIS GAME" />
+      <SectionHead num="01" title="ABOUT THIS GAME" />
       <MediaCarousel screenshots={screenshots} movies={movies} />
       <div className={styles.lore}>
         <div className={styles.loreCol}>
@@ -68,7 +67,7 @@ function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies:
         </div>
         <div className={styles.loreCol}>
           <div className={styles.loreFeatureBox}>
-            <div className={styles.loreFeatureTitle}>[ KEY FEATURES ]</div>
+            <div className={styles.loreFeatureTitle}>KEY FEATURES</div>
             <ul className={styles.loreFeatureList}>
               {KEY_FEATURES.map((f) => (
                 <li key={f}>{f}</li>
@@ -84,7 +83,7 @@ function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies:
 function Playtest() {
   return (
     <section className={styles.section} id="playtest">
-      <SectionHead num="02" title="// PLAYTEST REQUEST" />
+      <SectionHead num="02" title="PLAYTEST REQUEST" />
       <div className={styles.playtest}>
         <div className={styles.playtestIntro}>
           <p>
@@ -105,7 +104,7 @@ function Playtest() {
 function Studio() {
   return (
     <section className={styles.section} id="studio">
-      <SectionHead num="03" title="// THE STUDIO" />
+      <SectionHead num="03" title="THE STUDIO" />
       <div className={styles.studio}>
         <div className={styles.studioInfo}>
           <div className={styles.studioLogo}>
@@ -125,7 +124,7 @@ function Studio() {
           </div>
         </div>
         <div className={styles.contactBox}>
-          <div className={styles.contactBoxTitle}>[ CONTACT ]</div>
+          <div className={styles.contactBoxTitle}>CONTACT</div>
           <ContactForm />
         </div>
       </div>

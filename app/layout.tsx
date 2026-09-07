@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Pixelify_Sans, VT323, JetBrains_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const pixelifySans = Pixelify_Sans({
+const poppinsDisplay = Poppins({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const vt323 = VT323({
+const poppinsMono = Poppins({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "700"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const poppinsFallback = Poppins({
   variable: "--font-mono-fallback",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pixelifySans.variable} ${vt323.variable} ${jetbrainsMono.variable}`}
+      className={`${poppinsDisplay.variable} ${poppinsMono.variable} ${poppinsFallback.variable}`}
     >
       <body>{children}</body>
     </html>
