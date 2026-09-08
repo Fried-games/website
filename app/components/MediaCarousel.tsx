@@ -41,6 +41,15 @@ function scrollTo(strip: HTMLDivElement, thumb: HTMLElement, smooth = true) {
   const delta = thumbMid(thumb) - stripMid(strip);
   strip.scrollBy({ left: delta, behavior: smooth ? "smooth" : "instant" });
 }
+/* Teleports the strip back into the middle copy when it nears an edge;
+   returns the applied offset so a drag in progress can compensate. */
+function normalizeWrap(strip: HTMLDivElement) {
+  const oneSet = strip.scrollWidth / 3;
+  const distRight = strip.scrollWidth - strip.clientWidth - strip.scrollLeft;
+  const delta = strip.scrollLeft < oneSet * 0.4 ? oneSet : distRight < oneSet * 0.4 ? -oneSet : 0;
+  if (delta) strip.scrollLeft += delta;
+  return delta;
+}
 
 // ── sub-components ─────────────────────────────────────────────────────────
 function TrailerFeatured({ movie }: { movie: SteamMovie }) {
@@ -102,10 +111,27 @@ export default function MediaCarousel({
   const N = ITEMS.length;
 
   const [featured, setFeatured] = useState(0);
+  const prevFeaturedRef = useRef(0);
+  const prevFeatured = prevFeaturedRef.current;
+  useEffect(() => {
+    prevFeaturedRef.current = featured;
+  }, [featured]);
+
+  useEffect(() => {
+    ITEMS.forEach((item) => {
+      if (item.type === "screenshot") {
+        const img = new window.Image();
+        img.src = item.src;
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const stripRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const hasDragged = useRef(false);
   const isSnapping = useRef(false);
+  const isSmoothScrolling = useRef(false);
   const snapTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragOrigin = useRef({ x: 0, scrollLeft: 0 });
   const velRef = useRef({ v: 0, lastX: 0, lastT: 0 });
@@ -115,8 +141,13 @@ export default function MediaCarousel({
   const snapTo = (strip: HTMLDivElement, thumb: HTMLElement, idx: number) => {
     setFeatured(idx);
     isSnapping.current = true;
+    isSmoothScrolling.current = true;
     if (snapTimer.current) clearTimeout(snapTimer.current);
-    snapTimer.current = setTimeout(() => { isSnapping.current = false; }, 600);
+    snapTimer.current = setTimeout(() => {
+      if (stripRef.current) normalizeWrap(stripRef.current);
+      isSmoothScrolling.current = false;
+      isSnapping.current = false;
+    }, 600);
     scrollTo(strip, thumb);
   };
 
@@ -194,16 +225,17 @@ export default function MediaCarousel({
   const onStripScroll = () => {
     const strip = stripRef.current;
     if (!strip) return;
-    const oneSet = strip.scrollWidth / 3;
-    const distRight = strip.scrollWidth - strip.clientWidth - strip.scrollLeft;
-    if (strip.scrollLeft < oneSet * 0.4) strip.scrollLeft += oneSet;
-    else if (distRight < oneSet * 0.4) strip.scrollLeft -= oneSet;
+    if (!isSmoothScrolling.current) {
+      const delta = normalizeWrap(strip);
+      if (delta && isDragging.current) dragOrigin.current.scrollLeft += delta;
+    }
     if (!isSnapping.current) setFeatured(closest(strip, N).idx);
   };
 
   const slide = (dir: -1 | 1) => {
     const strip = stripRef.current;
     if (!strip) return;
+    normalizeWrap(strip);
     const cur = closest(strip, N);
     const nextIdx = (cur.idx + dir + N) % N;
     const mid = stripMid(strip);
@@ -224,6 +256,7 @@ export default function MediaCarousel({
     if (hasDragged.current) return;
     const strip = stripRef.current;
     if (!strip) return;
+    normalizeWrap(strip);
     const mid = stripMid(strip);
     const candidates = allThumbs(strip).filter((_, i) => i % N === itemIdx);
     const best = candidates.reduce((b, t) =>
@@ -233,22 +266,33 @@ export default function MediaCarousel({
   };
 
   const current = ITEMS[featured];
+  const previous = prevFeatured !== featured ? ITEMS[prevFeatured] : null;
+
+  const renderFeatured = (item: Item) =>
+    item.type === "trailer" ? (
+      <TrailerFeatured movie={item.movie} />
+    ) : (
+      /* eslint-disable-next-line @next/next/no-img-element */
+      <img
+        className={styles.featuredImg}
+        src={item.src}
+        alt="Stroom screenshot"
+        draggable={false}
+      />
+    );
 
   return (
     <div className={styles.mediaLayout}>
       {/* Featured */}
       <div className={styles.featuredFrame}>
-        {current.type === "trailer" ? (
-          <TrailerFeatured movie={current.movie} />
-        ) : (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            className={styles.featuredImg}
-            src={current.src}
-            alt="Stroom screenshot"
-            draggable={false}
-          />
+        {previous && (
+          <div className={styles.featuredPrev} aria-hidden>
+            {renderFeatured(previous)}
+          </div>
         )}
+        <div key={featured} className={styles.featuredCurrent}>
+          {renderFeatured(current)}
+        </div>
         <div className={styles.featuredCornerTl} />
         <div className={styles.featuredCornerTr} />
         <div className={styles.featuredCornerBl} />
