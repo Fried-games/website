@@ -4,30 +4,25 @@ import PlaytestForm from "./components/PlaytestForm";
 import MediaCarousel from "./components/MediaCarousel";
 import Footer from "./components/Footer";
 import ContactForm from "./components/ContactForm";
+import CRTOverlay from "./components/CRTOverlay";
+import Nav from "./components/Nav";
+import StructuredData from "./components/StructuredData";
 import { getSteamAppData, type SteamScreenshot, type SteamMovie } from "./lib/steam";
+import { SITE_URL } from "./lib/site";
+import type { Metadata } from "next";
 
-const STEAM_URL =
-  "http://store.steampowered.com/app/3869320/Stroom/?beta=1";
-
-function CRTOverlay() {
-  return (
-    <div className={styles.crtOverlay} aria-hidden="true">
-      <div className={styles.crtVignette} />
-      <div className={styles.crtFlicker} />
-    </div>
-  );
-}
+export const metadata: Metadata = {
+  alternates: { canonical: SITE_URL },
+};
 
 function SectionHead({
-  num,
   title,
 }: {
-  num: string;
   title: string;
 }) {
   return (
     <div className={styles.sectionHead}>
-      <span className={styles.sectionNum}>{num}</span>
+      <span className={styles.sectionRule} />
       <h2 className={styles.sectionTitle}>{title}</h2>
       <span className={styles.sectionRule} />
     </div>
@@ -38,7 +33,7 @@ const KEY_FEATURES = [
   "100 HANDCRAFTED LEVELS across 5 worlds",
   "25 BONUS LEVELS for an extra challenge",
   "5 UNIQUE BOSS FIGHTS",
-  "TIGHT, RESPONSIVE CONTROLS — dash, slide, wallslide and more",
+  "TIGHT, RESPONSIVE CONTROLS: dash, slide, wallslide and more",
   "Every level has an OPTIMAL PATH to discover and master",
   "FULL CONTROLLER SUPPORT",
 ];
@@ -46,13 +41,13 @@ const KEY_FEATURES = [
 function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies: SteamMovie[] }) {
   return (
     <section className={styles.section} id="lore">
-      <SectionHead num="01" title="ABOUT THIS GAME" />
+      <SectionHead title="ABOUT THIS GAME" />
       <MediaCarousel screenshots={screenshots} movies={movies} />
       <div className={styles.lore}>
         <div className={styles.loreCol}>
           <p className={styles.loreBody}>
             Stroom is a precision platformer about a black cat struck by lightning
-            and left with one unexpected side effect — electric powers.
+            and left with one unexpected side effect: electric powers.
           </p>
           <p className={styles.loreBody}>
             Dash through obstacles, charge past enemies, wallslide through
@@ -63,7 +58,7 @@ function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies:
           <p className={styles.loreBody}>
             Five worlds. Five bosses. One cat trying to get home.
           </p>
-          <p className={styles.loreTagline}>— Die. Learn. Go faster.</p>
+          <p className={styles.loreTagline}>Die. Learn. Go faster.</p>
         </div>
         <div className={styles.loreCol}>
           <div className={styles.loreFeatureBox}>
@@ -83,7 +78,7 @@ function Lore({ screenshots, movies }: { screenshots: SteamScreenshot[]; movies:
 function Playtest() {
   return (
     <section className={styles.section} id="playtest">
-      <SectionHead num="02" title="PLAYTEST REQUEST" />
+      <SectionHead title="PLAYTEST REQUEST" />
       <div className={styles.playtest}>
         <div className={styles.playtestIntro}>
           <p>
@@ -104,7 +99,7 @@ function Playtest() {
 function Studio() {
   return (
     <section className={styles.section} id="studio">
-      <SectionHead num="03" title="THE STUDIO" />
+      <SectionHead title="THE STUDIO" />
       <div className={styles.studio}>
         <div className={styles.studioInfo}>
           <div className={styles.studioLogo}>
@@ -139,26 +134,9 @@ export default async function Page() {
 
   return (
     <div className={styles.page}>
+      <StructuredData />
       <CRTOverlay />
-      <nav className={styles.nav}>
-        <a href="#" className={styles.navBrand}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/stroom/fg-logo-banner.png" alt="Fried Games" className={styles.navLogo} />
-        </a>
-        <div className={styles.navLinks}>
-          <a href="#lore">ABOUT</a>
-          <a href="#playtest">PLAYTEST</a>
-          <a href="#studio">STUDIO</a>
-        </div>
-        <a
-          className={styles.navCta}
-          href={STEAM_URL}
-          target="_blank"
-          rel="noopener"
-        >
-          WISHLIST ►
-        </a>
-      </nav>
+      <Nav />
       <Hero />
       <Lore screenshots={screenshots} movies={movies} />
       <Playtest />

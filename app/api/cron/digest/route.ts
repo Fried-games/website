@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, sent: false });
   }
 
-  const lines = data.map((r, i) => `${i + 1}. ${r.email} — ${r.skill}`).join("\n");
+  const lines = data.map((r, i) => `${i + 1}. ${r.email} (${r.skill})`).join("\n");
 
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL as string,

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import styles from "../page.module.css";
 
 type State = "idle" | "loading" | "done" | "error";
@@ -11,6 +12,11 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState]     = useState<State>("idle");
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -21,7 +27,7 @@ export default function ContactForm() {
       const res = await fetch("/stroom/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, website }),
+        body: JSON.stringify({ name, email, message, website, startedAt: startedAt.current }),
       });
       if (!res.ok) throw new Error();
       setState("done");
@@ -79,6 +85,10 @@ export default function ContactForm() {
           onChange={(e) => setMessage(e.target.value)}
         />
       </label>
+
+      <p className={styles.formNote}>
+        We only use your details to reply to you. See our <Link href="/privacy">privacy policy</Link>.
+      </p>
 
       {state === "error" && (
         <div style={{ color: "var(--red)", fontSize: 15 }}>

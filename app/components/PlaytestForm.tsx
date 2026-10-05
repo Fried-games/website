@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import styles from "../page.module.css";
 
 type State = "idle" | "loading" | "done" | "error";
@@ -10,6 +11,11 @@ export default function PlaytestForm() {
   const [skill, setSkill]   = useState("BEGINNER");
   const [website, setWebsite] = useState(""); // honeypot
   const [state, setState]   = useState<State>("idle");
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -20,7 +26,7 @@ export default function PlaytestForm() {
       const res = await fetch("/stroom/api/playtest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, skill, website }),
+        body: JSON.stringify({ email, skill, website, startedAt: startedAt.current }),
       });
       if (!res.ok) throw new Error();
       setState("done");
@@ -31,7 +37,7 @@ export default function PlaytestForm() {
 
   return (
     <form className={styles.playtestForm} onSubmit={submit}>
-      {/* Honeypot — invisible pour les humains */}
+      {/* Honeypot : invisible pour les humains */}
       <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
         <label>
           Website
@@ -52,7 +58,7 @@ export default function PlaytestForm() {
           className={styles.fieldInput}
           type="email"
           required
-          placeholder="cat@unknown.world"
+          placeholder="you@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -75,6 +81,11 @@ export default function PlaytestForm() {
           ))}
         </div>
       </fieldset>
+
+      <p className={styles.formNote}>
+        By submitting, you agree that we store your email to contact you about the playtest.
+        See our <Link href="/privacy">privacy policy</Link>.
+      </p>
 
       <button
         type="submit"

@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
+import { clientIp, hasTooManyLinks, isRateLimited, isText, isValidEmail, looksLikeBot } from "../../lib/antispam";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -7,17 +8,27 @@ const supabase = createClient(
 );
 
 export async function POST(req: NextRequest) {
-  const { name, email, message, website } = await req.json();
+  const body = await req.json().catch(() => null);
+  if (!body) return NextResponse.json({ error: "Invalid request" }, { status: 400 });
 
-  if (website) return NextResponse.json({ ok: true });
+  const { name, email, message, website, startedAt } = body;
 
-  if (!name || !email || !message) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+  if (isRateLimited(`contact:${clientIp(req)}`)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
+
+  // Pretend success so bots don't learn what tripped them.
+  if (looksLikeBot(website, startedAt)) return NextResponse.json({ ok: true });
+
+  if (!isText(name, 100) || !isValidEmail(email) || !isText(message, 5000)) {
+    return NextResponse.json({ error: "Invalid fields" }, { status: 400 });
+  }
+
+  if (hasTooManyLinks(message)) return NextResponse.json({ ok: true });
 
   const { error } = await supabase
     .from("contact_submissions")
-    .insert({ name, email, message, type: "contact" });
+    .insert({ name: name.trim(), email: email.trim(), message: message.trim(), type: "contact" });
 
   if (error) {
     console.error("Supabase insert error:", error);

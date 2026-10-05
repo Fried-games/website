@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "../page.module.css";
-
-const STEAM_URL =
-  "http://store.steampowered.com/app/3869320/Stroom/?beta=1";
+import { STEAM_URL } from "../lib/site";
 
 export default function Hero() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,11 +32,8 @@ export default function Hero() {
           >
             ► WISHLIST ON STEAM
           </a>
-          <a className={styles.pixBtn} href="#playtest">
-            ▶ JOIN PLAYTEST
-          </a>
         </div>
-        <div className={styles.heroComing}>COMING 2026</div>
+        <div className={styles.heroComing}>COMING 2027</div>
       </div>
 
       <div className={`${styles.scrollArrow} ${scrolled ? styles.scrollArrowHidden : ""}`} aria-hidden="true">
