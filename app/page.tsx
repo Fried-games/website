@@ -5,6 +5,7 @@ import MediaCarousel from "./components/MediaCarousel";
 import Footer from "./components/Footer";
 import ContactForm from "./components/ContactForm";
 import CRTOverlay from "./components/CRTOverlay";
+import ParticlesBg from "./components/ParticlesBg";
 import Nav from "./components/Nav";
 import StructuredData from "./components/StructuredData";
 import { getSteamAppData, type SteamScreenshot, type SteamMovie } from "./lib/steam";
@@ -109,12 +110,12 @@ function Studio() {
           <div className={styles.studioTxt}>
             <div className={styles.studioName}>FRIED GAMES</div>
             <p>
-              A small independent studio simmering somewhere in France.
+              A small independent game studio based in France.
             </p>
             <p>
-              Currently on the stove: <strong>Stroom</strong>, a precision
-              platformer about a cat with electric powers. Taste-test it
-              before it&apos;s done.
+              We&apos;re currently working on <strong>Stroom</strong>, a precision
+              platformer about a cat with electric powers. Join the playtest
+              and help us shape it.
             </p>
           </div>
         </div>
@@ -135,6 +136,7 @@ export default async function Page() {
   return (
     <div className={styles.page}>
       <StructuredData />
+      <ParticlesBg />
       <CRTOverlay />
       <Nav />
       <Hero />

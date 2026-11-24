@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  --font-mono: var(--font-display);
+}
+
 html, body {
   margin: 0;
   padding: 0;

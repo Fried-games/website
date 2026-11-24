@@ -7,13 +7,13 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY!
 );
 
-const SKILLS = ["BEGINNER", "CONFIRMED", "EXPERT"];
+const INTRO_MAX = 1000;
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: "Invalid request" }, { status: 400 });
 
-  const { email, skill, website, startedAt } = body;
+  const { email, intro, website, startedAt } = body;
 
   if (isRateLimited(`playtest:${clientIp(req)}`)) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
@@ -37,7 +37,10 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabase
     .from("playtest_requests")
-    .insert({ email: normalized, skill: SKILLS.includes(skill) ? skill : "BEGINNER" });
+    .insert({
+      email: normalized,
+      intro: typeof intro === "string" && intro.trim() ? intro.trim().slice(0, INTRO_MAX) : null,
+    });
 
   if (error) {
     console.error("Supabase insert error:", error);

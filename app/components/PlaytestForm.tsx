@@ -8,7 +8,7 @@ type State = "idle" | "loading" | "done" | "error";
 
 export default function PlaytestForm() {
   const [email, setEmail]   = useState("");
-  const [skill, setSkill]   = useState("BEGINNER");
+  const [intro, setIntro]   = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [state, setState]   = useState<State>("idle");
   const startedAt = useRef(0);
@@ -26,7 +26,7 @@ export default function PlaytestForm() {
       const res = await fetch("/stroom/api/playtest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, skill, website, startedAt: startedAt.current }),
+        body: JSON.stringify({ email, intro, website, startedAt: startedAt.current }),
       });
       if (!res.ok) throw new Error();
       setState("done");
@@ -64,23 +64,18 @@ export default function PlaytestForm() {
         />
       </label>
 
-      <fieldset className={styles.field} style={{ border: "none", padding: 0, margin: 0 }}>
-        <legend className={styles.fieldLabel}>PLATFORMER SKILL LEVEL</legend>
-        <div className={styles.skillOptions}>
-          {(["BEGINNER", "CONFIRMED", "EXPERT"] as const).map((level) => (
-            <label key={level} className={styles.skillOption}>
-              <input
-                type="radio"
-                name="skill"
-                value={level}
-                checked={skill === level}
-                onChange={() => setSkill(level)}
-              />
-              <span>{level}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      <label className={styles.field}>
+        <span className={styles.fieldLabel}>
+          TELL US ABOUT YOURSELF <span className={styles.fieldOptional}>(OPTIONAL)</span>
+        </span>
+        <textarea
+          className={`${styles.fieldInput} ${styles.fieldTextarea}`}
+          maxLength={1000}
+          placeholder="A few words about you: what you play, platformers you like, how much time you can give..."
+          value={intro}
+          onChange={(e) => setIntro(e.target.value)}
+        />
+      </label>
 
       <p className={styles.formNote}>
         By submitting, you agree that we store your email to contact you about the playtest.
@@ -92,7 +87,7 @@ export default function PlaytestForm() {
         disabled={state === "loading" || state === "done"}
         className={`${styles.pixBtn} ${styles.pixBtnPrimary} ${styles.pixBtnBlock}`}
       >
-        {state === "loading" ? "SENDING…" : state === "done" ? "✓ REQUEST RECEIVED" : "► SUBMIT REQUEST"}
+        {state === "loading" ? "SENDING…" : state === "done" ? "✓ REQUEST RECEIVED" : "SUBMIT REQUEST"}
       </button>
 
       {state === "done" && (

@@ -40,8 +40,8 @@ export default function PrivacyPage() {
           <h2>What we collect</h2>
           <ul>
             <li>
-              <strong>Playtest request:</strong> your email address and the skill
-              level you choose.
+              <strong>Playtest request:</strong> your email address and, if you
+              choose to write one, the short introduction you send us.
             </li>
             <li>
               <strong>Contact form:</strong> your name, email address and message.

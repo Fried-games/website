@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "./lib/site";
 
-const poppinsDisplay = Poppins({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-});
-
-const poppinsMono = Poppins({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
-
-const poppinsFallback = Poppins({
-  variable: "--font-mono-fallback",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
 });
 
 const DESCRIPTION =
@@ -61,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppinsDisplay.variable} ${poppinsMono.variable} ${poppinsFallback.variable}`}
+      className={spaceGrotesk.variable}
     >
       <body>{children}</body>
     </html>

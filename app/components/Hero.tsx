@@ -30,7 +30,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener"
           >
-            ► WISHLIST ON STEAM
+            WISHLIST ON STEAM
           </a>
         </div>
         <div className={styles.heroComing}>COMING 2027</div>

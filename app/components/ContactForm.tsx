@@ -101,7 +101,7 @@ export default function ContactForm() {
         disabled={state === "loading"}
         className={`${styles.pixBtn} ${styles.pixBtnPrimary} ${styles.pixBtnBlock}`}
       >
-        {state === "loading" ? "SENDING…" : "► SEND MESSAGE"}
+        {state === "loading" ? "SENDING…" : "SEND MESSAGE"}
       </button>
     </form>
   );

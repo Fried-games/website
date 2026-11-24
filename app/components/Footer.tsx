@@ -74,9 +74,8 @@ export default function Footer() {
         </div>
         <div className={styles.footerLinks}>
           {LINKS.map(({ label, sub, href, icon }) => (
-            <a key={href} className={styles.footerLink} href={href} target="_blank" rel="noopener" aria-label={`${label}, ${sub}`}>
+            <a key={href} className={styles.footerLink} href={href} target="_blank" rel="noopener" aria-label={`${label}, ${sub}`} title={label}>
               <span className={styles.footerIcon}>{icon}</span>
-              <span className={styles.footerLinkLabel}>{label}</span>
               <span className={styles.footerLinkSub}>{sub}</span>
             </a>
           ))}
@@ -86,8 +85,6 @@ export default function Footer() {
         <span>© 2026 FRIED GAMES B.V.</span>
         <span className={styles.footerDot}>·</span>
         <span>STROOM™ IS A TRADEMARK OF FRIED GAMES</span>
-        <span className={styles.footerDot}>·</span>
-        <span>MADE IN THE KITCHEN</span>
         <span className={styles.footerDot}>·</span>
         <Link href="/privacy" className={styles.footerLegal}>PRIVACY POLICY</Link>
       </div>

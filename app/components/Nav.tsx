@@ -15,7 +15,7 @@ export default function Nav() {
         <Link href="/#studio">STUDIO</Link>
       </div>
       <a className={styles.navCta} href={STEAM_URL} target="_blank" rel="noopener">
-        WISHLIST ►
+        WISHLIST
       </a>
     </nav>
   );

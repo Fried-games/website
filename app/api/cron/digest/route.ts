@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await supabase
     .from("playtest_requests")
-    .select("email, skill, created_at")
+    .select("email, intro, created_at")
     .gte("created_at", today.toISOString())
     .order("created_at", { ascending: false });
 
@@ -33,7 +33,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, sent: false });
   }
 
-  const lines = data.map((r, i) => `${i + 1}. ${r.email} (${r.skill})`).join("\n");
+  const lines = data
+    .map((r, i) => `${i + 1}. ${r.email}${r.intro ? `\n   ${String(r.intro).replace(/\s*\n\s*/g, " / ")}` : ""}`)
+    .join("\n\n");
 
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL as string,
